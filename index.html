@@ -8,7 +8,11 @@
 </head>
 <body>
     <script>
-       
+        //Scorekeeping
+        let playerScore = parseInt(0);
+        let computerScore = parseInt(0);
+
+    function game() {
         //Computer randomly returns either Rock, Paper or Scissors
         let computerSelection = Math.ceil(Math.random() * 3);
         if (computerSelection == 1) {
@@ -43,31 +47,31 @@
                 return 'You lose! Rock beats Scissors';
             } else return 'Sorry, could you repeat that?'
         }
+        //To add: option in case playerSelection is cancelled/null
 
-        //Scorekeeping
-        let playerScore = parseInt(0);
-        let computerScore = parseInt(0);
+        //Get input from the user
+        let playerChoice = prompt('1, 2, 3, throw!');
+        let playerSelection = playerChoice.toLocaleLowerCase();
 
-        //Announce the winner
-        function announceWinner() {
-            if (playerScore < computerScore) {
-                console.log('You win!');
-            } else if (playerScore > computerScore) {
-                console.log('You lose!');
-            } else console.log('Tie game');
-        }
-        
-        //Get input from the user, play 5 times 
-        for (let i = 0; i < 5; i++) {
-            let playerChoice = prompt('1, 2, 3, throw!');
-            let playerSelection = playerChoice.toLocaleLowerCase();
-            console.log(playRound(playerSelection, computerSelection));
-            console.log('Your score is ' + playerScore);
-            console.log('The computer\'s score is ' + computerScore);
-        }
-        
-        //To add: Option in case playerSelection is cancelled/null 
-        //To add: computerSelection must be a function() else variable is same for 5 rounds
+        console.log(playRound(playerSelection, computerSelection));
+        console.log('Your score is ' + playerScore);
+        console.log('The computer\'s score is ' + computerScore);
+    }
+    game();
+    game();
+    game();
+    game();
+    game();
+
+    //Announce the winner
+    function announceWinner() {
+        if (playerScore < computerScore) {
+            console.log('You lose!');
+        } else if (playerScore > computerScore) {
+            console.log('You win!');
+        } else console.log('Tie game');
+    }
+    announceWinner();
 
     </script>
 </body>
