@@ -16,6 +16,7 @@
     </div>
 
     <script>
+
         //Scorekeeping
         let playerScore = parseInt(0);
         let computerScore = parseInt(0);
@@ -67,7 +68,7 @@
             } else {
                 playerScore++;
                 return 'You win! Rock beats Scissors';
-            } console.log(computerSelection);
+            }
         }
 
         function playPaper() {
@@ -80,7 +81,7 @@
             } else {
                 computerScore++;
                 return 'You lose! Scissors beats Paper';
-            } console.log(computerSelection);
+            }
         }
 
         function playScissors() {
@@ -95,24 +96,45 @@
                 return 'A tie! Throw again!';
             }
         }
-        console.log(playScissors());
+
 
         //Get input from the user
         //let playerChoice = prompt('1, 2, 3, throw!');
         //let playerSelection = playerChoice.toLocaleLowerCase();
 
         const rock = document.getElementById('rock');
-        rock.addEventListener('click', playRock);
+        //rock.addEventListener('click', playRock);
+        //document.getElementById('rock').onclick = playRock;
+        rock.onclick = function() {
+            playRock();
+            console.log(playRock());
+            console.log('Your score is ' + playerScore);
+            console.log('The computer\'s score is ' + computerScore);
+        };
 
         const paper = document.getElementById('paper');
-        paper.addEventListener('click', playPaper);
+        //paper.addEventListener('click', playPaper);
+        //document.getElementById('paper').onclick = playPaper;
+        paper.onclick = function() {
+            playPaper();
+            console.log(playPaper());
+            console.log('Your score is ' + playerScore);
+            console.log('The computer\'s score is ' + computerScore);
+        };
 
         const scissors = document.getElementById('scissors');
-        scissors.addEventListener('click', playScissors);
+        //scissors.addEventListener('click', playScissors);
+        //document.getElementById('scissors').onclick = playScissors;
+        scissors.onclick = function() {
+            playScissors();
+            console.log(playScissors());
+            console.log('Your score is ' + playerScore);
+            console.log('The computer\'s score is ' + computerScore);
+        };
 
         //console.log(playRound(playerSelection, computerSelection));
-        console.log('Your score is ' + playerScore);
-        console.log('The computer\'s score is ' + computerScore);
+        //console.log('Your score is ' + playerScore);
+        //console.log('The computer\'s score is ' + computerScore);
     
     
         //function announceWinner() {
