@@ -24,6 +24,7 @@
 
     const container = document.querySelector('#container');
     const compChoice = document.createElement('div');
+    const runningScore = document.createElement('div');
     
     function game() {
 
@@ -68,6 +69,8 @@
         console.log('Your score is ' + playerScore);
         console.log('The computer\'s score is ' + computerScore);
 
+        runningScore.textContent = `Your score is ${playerScore}. The computer's score is ${computerScore}.`;
+        container.appendChild(runningScore);
     }
 
     //Announce the winner
