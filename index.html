@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title> <!--Renamed restart-rps-ui to index.html-->
 </head>
-
 <body>
     <div>
         <button id="rock">Rock</button>
@@ -15,139 +13,106 @@
         <button id="scissors">Scissors</button>
     </div>
 
+    <div id="container"></div>
+
     <script>
 
-        //Scorekeeping
-        let playerScore = parseInt(0);
-        let computerScore = parseInt(0);
-        
+    //Scorekeeping
+    let playerScore = parseInt(0);
+    let computerScore = parseInt(0);
+    let playerSelection = '';
+
+    const container = document.querySelector('#container');
+    const compChoice = document.createElement('div');
+    const result = document.createElement('div');
+    const runningScore = document.createElement('div');
+    const announce = document.createElement('div');
+    
+    function game() {
 
         //Computer randomly returns either Rock, Paper or Scissors
-        //let computerSelection = Math.ceil(Math.random() * 3);
-        //if (computerSelection == 1) {
-        //    computerSelection = 'rock';
-        //} else if (computerSelection == 2) {
-        //    computerSelection = 'paper';
-        //} else computerSelection = 'scissors';
+        let computerSelection = Math.ceil(Math.random() * 3);
+        if (computerSelection == 1) {
+            computerSelection = 'rock';
+        } else if (computerSelection == 2) {
+            computerSelection = 'paper';
+        } else {
+            computerSelection = 'scissors';
+        }
 
-        //console.log(computerSelection);
-
+        compChoice.textContent = 'The computer chose ' + computerSelection;
+        container.appendChild(compChoice);
 
         //Play a single round of Rock Paper Scissors
-        //function playRound(playerSelection, computerSelection) {
-        //    if (playerSelection == computerSelection) {
-        //        return 'A tie! Throw again!';
-        //    } else if (playerSelection == 'rock' && computerSelection == 'paper') {
-        //        computerScore++;
-        //        return 'You lose! Paper beats Rock';
-        //    } else if (playerSelection == 'rock' && computerSelection == 'scissors') {
-        //        playerScore++;
-        //        return 'You win! Rock beats Scissors';
-        //    } else if (playerSelection == 'paper' && computerSelection == 'rock') {
-        //        playerScore++;
-        //        return 'You win! Paper beats Rock';
-        //    } else if (playerSelection == 'paper' && computerSelection == 'scissors') {
-        //        computerScore++;
-        //        return 'You lose! Scissors beats Paper';
-        //    } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
-        //        playerScore++;
-        //        return 'You win! Scissors beats Paper';
-        //    } else if (playerSelection == 'scissors' && computerSelection == 'rock') {
-        //        computerScore++;
-        //        return 'You lose! Rock beats Scissors';
-        //    } else return 'Sorry, could you repeat that?';
-        //}
-        
-        function playRock() {
-            let computerSelection = Math.ceil(Math.random() * 3);
-            if (computerSelection == 1) {
-                return 'A tie! Throw again!';
-            } else if (computerSelection == 2) {
+        function playRound(playerSelection, computerSelection) {
+            if (playerSelection == computerSelection) {
+                result.textContent = 'A tie! Throw again!';
+            } else if (playerSelection == 'rock' && computerSelection == 'paper') {
                 computerScore++;
-                return 'You lose! Paper beats Rock';
-            } else {
+                result.textContent = 'You lose! Paper beats Rock';
+            } else if (playerSelection == 'rock' && computerSelection == 'scissors') {
                 playerScore++;
-                return 'You win! Rock beats Scissors';
-            }
-        }
-
-        function playPaper() {
-            let computerSelection = Math.ceil(Math.random() * 3);
-            if (computerSelection == 1) {
+                result.textContent = 'You win! Rock beats Scissors';
+            } else if (playerSelection == 'paper' && computerSelection == 'rock') {
                 playerScore++;
-                return 'You win! Paper beats Rock';
-            } else if (computerSelection == 2) {
-                return 'A tie! Throw again!';
-            } else {
+                result.textContent = 'You win! Paper beats Rock';
+            } else if (playerSelection == 'paper' && computerSelection == 'scissors') {
                 computerScore++;
-                return 'You lose! Scissors beats Paper';
-            }
-        }
-
-        function playScissors() {
-            let computerSelection = Math.ceil(Math.random() * 3);
-            if (computerSelection == 1) {
-                computerScore++;
-                return 'You lose! Rock beats Scissors';
-            } else if (computerSelection == 2) {
+                result.textContent = 'You lose! Scissors beats Paper';
+            } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
                 playerScore++;
-                return 'You win! Scissors beats Paper';
+                result.textContent = 'You win! Scissors beats Paper';
+            } else if (playerSelection == 'scissors' && computerSelection == 'rock') {
+                computerScore++;
+                result.textContent = 'You lose! Rock beats Scissors';
             } else {
-                return 'A tie! Throw again!';
-            }
+                result.textContent = 'Sorry, could you repeat that?';
+            } 
         }
+        container.appendChild(result);
+        playRound(playerSelection, computerSelection);
 
+        runningScore.textContent = `Your score is ${playerScore}. The computer's score is ${computerScore}.`;
+        container.appendChild(runningScore);
+    }
 
-        //Get input from the user
-        //let playerChoice = prompt('1, 2, 3, throw!');
-        //let playerSelection = playerChoice.toLocaleLowerCase();
+    //Announce the winner
+    function announceWinner() {
+        if (playerScore == 5) {
+            announce.textContent = 'You won the game!';
+            playerScore = 0;
+            computerScore = 0;
+        } else if (computerScore == 5) {
+            announce.textContent = 'You lost the game!';
+            playerScore = 0;
+            computerScore = 0;
+        } else {
+            announce.textContent = 'Another round...';
+        }
+        container.appendChild(announce);
+    }
 
-        const rock = document.getElementById('rock');
-        //rock.addEventListener('click', playRock);
-        //document.getElementById('rock').onclick = playRock;
-        rock.onclick = function() {
-            playRock();
-            console.log(playRock());
-            console.log('Your score is ' + playerScore);
-            console.log('The computer\'s score is ' + computerScore);
-        };
+    const rock = document.getElementById('rock');
+    rock.onclick = function() {
+        playerSelection = 'rock';
+        game();
+        announceWinner();
+    }
 
-        const paper = document.getElementById('paper');
-        //paper.addEventListener('click', playPaper);
-        //document.getElementById('paper').onclick = playPaper;
-        paper.onclick = function() {
-            playPaper();
-            console.log(playPaper());
-            console.log('Your score is ' + playerScore);
-            console.log('The computer\'s score is ' + computerScore);
-        };
+    const paper = document.getElementById('paper');
+    paper.onclick = function() {
+        playerSelection = 'paper';
+        game();
+        announceWinner();
+    }
 
-        const scissors = document.getElementById('scissors');
-        //scissors.addEventListener('click', playScissors);
-        //document.getElementById('scissors').onclick = playScissors;
-        scissors.onclick = function() {
-            playScissors();
-            console.log(playScissors());
-            console.log('Your score is ' + playerScore);
-            console.log('The computer\'s score is ' + computerScore);
-        };
-
-        //console.log(playRound(playerSelection, computerSelection));
-        //console.log('Your score is ' + playerScore);
-        //console.log('The computer\'s score is ' + computerScore);
-    
-    
-        //function announceWinner() {
-        //    if (playerScore < computerScore) {
-        //        console.log('You lose!');
-        //    } else if (playerScore > computerScore) {
-        //        console.log('You win!');
-        //    } else console.log('Tie game');
-        //}
-        //announceWinner();
+    const scissors = document.getElementById('scissors');
+    scissors.onclick = function() {
+        playerSelection = 'scissors';
+        game();
+        announceWinner();
+    }
 
     </script>
-
 </body>
-
 </html>
