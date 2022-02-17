@@ -8,6 +8,12 @@ const compChoice = document.createElement('div');
 const result = document.createElement('div');
 const runningScore = document.createElement('div');
 const announce = document.createElement('div');
+
+const player = document.getElementById('userScore');
+const computer = document.getElementById('computerScore')
+const displayUser = document.createElement('div');
+const displayComputer = document.createElement('div');
+
     
 function game() {
 
@@ -53,8 +59,14 @@ function game() {
     container.appendChild(result);
     playRound(playerSelection, computerSelection);
 
-    runningScore.textContent = `Your score is ${playerScore}. The computer's score is ${computerScore}.`;
-    container.appendChild(runningScore);
+    // runningScore.textContent = `Your score is ${playerScore}. The computer's score is ${computerScore}.`;
+    // container.appendChild(runningScore);
+
+    displayUser.textContent = `${playerScore}`;
+    player.appendChild(displayUser);
+
+    displayComputer.textContent = `${computerScore}`;
+    computer.appendChild(displayComputer);
 }
 
 //Announce the winner

@@ -1,15 +1,47 @@
 body {
-    background: olivedrab;
-    color: white;
+    background: linear-gradient(90deg, aqua, white, coral);
 }
 
 button {
-    background: limegreen;
+    background: lemonchiffon;
     border-radius: 10px;
+    margin-left: 10px;
 }
 
 img {
     height: 150px;
     width: 150px;
     padding: 10px;
+}
+
+#display {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+#user, #computer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: lemonchiffon;
+    width: 120px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+label {
+    padding: 10px;
+    font-size: large;
+    font-weight: bold;
+}
+
+#userScore, #computerScore {
+    font-size: 100px;
+}
+
+#container {
+    padding: 30px;
+    font-size: 30px;
 }
